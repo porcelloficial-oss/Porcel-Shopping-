@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Porcel Shop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: #151515;
+            border-bottom: 1px solid #292929;
+
+            padding: 15px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 3px 15px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #00d4ff;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        nav button {
+            background: transparent;
+            border: 1px solid #333;
+            color: #ddd;
+
+            padding: 9px 12px;
+            border-radius: 8px;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        nav button:hover {
+            background: #00d4ff;
+            color: #000;
+            border-color: #00d4ff;
+        }
+
+        /* =========================
+           TELAS
+        ========================= */
+
+        .pagina {
+            display: none;
+            padding: 25px 15px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .pagina.ativa {
+            display: block;
+        }
+
+        /* =========================
+           INÍCIO
+        ========================= */
+
+        .hero {
+            min-height: 430px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 30px 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 8vw, 65px);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #00d4ff;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 17px;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        .botao-principal {
+            margin-top: 25px;
+
+            background: #00d4ff;
+            color: #001014;
+
+            border: none;
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botao-principal:hover {
+            transform: scale(1.04);
+            background: #22ddff;
+        }
+
+        /* =========================
+           TÍTULOS
+        ========================= */
+
+        .titulo-pagina {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titulo-pagina h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .titulo-pagina p {
+            color: #999;
+        }
+
+        /* =========================
+           BUSCA
+        ========================= */
+
+        .busca {
+            width: 100%;
+            max-width: 600px;
+
+            display: block;
+            margin: 0 auto 25px;
+
+            background: #191919;
+            color: white;
+
+            border: 1px solid #333;
+            outline: none;
+
+            padding: 14px 16px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+        }
+
+        .busca:focus {
+            border-color: #00d4ff;
+        }
+
+        /* =========================
+           PRODUTOS
+        ========================= */
+
+        .produtos {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill, minmax(230px, 1fr));
+
+            gap: 20px;
+        }
+
+        .produto {
+            background: #181818;
+
+            border: 1px solid #292929;
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            transition: 0.25s;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+        }
+
+        .produto:hover {
+            transform: translateY(-4px);
+            border-color: #00d4ff;
+        }
+
+        .produto img {
+            width: 100%;
+            height: 220px;
+
+            object-fit: cover;
+
+            display: block;
+
+            background: #222;
+        }
+
+        .produto-conteudo {
+            padding: 15px;
+        }
+
+        .produto h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .preco {
+            color: #00d4ff;
+
+            font-size: 21px;
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .descricao {
+            color: #aaa;
+
+            font-size: 14px;
+            line-height: 1.5;
+
+            margin-bottom: 15px;
+        }
+
+        .whatsapp {
+            display: block;
+
+            width: 100%;
+
+            background: #25D366;
+            color: white;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        .sem-produtos {
+            text-align: center;
+
+            color: #777;
+
+            padding: 50px 15px;
+
+            grid-column: 1 / -1;
+        }
+
+        /* =========================
+           FORMULÁRIO
+        ========================= */
+
+        .formulario {
+            max-width: 650px;
+            margin: auto;
+
+            background: #181818;
+
+            border: 1px solid #292929;
+            border-radius: 15px;
+
+            padding: 20px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .campo {
+            margin-bottom: 17px;
+        }
+
+        .campo label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #ddd;
+            font-weight: bold;
+        }
+
+        .campo input,
+        .campo textarea {
+            width: 100%;
+
+            background: #101010;
+            color: white;
+
+            border: 1px solid #333;
+            outline: none;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+        }
+
+        .campo textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .campo input:focus,
+        .campo textarea:focus {
+            border-color: #00d4ff;
+        }
+
+        /* =========================
+           IMAGEM
+        ========================= */
+
+        #campoImagem {
+            display: none;
+        }
+
+        .botao-imagem {
+            display: block;
+
+            background: #222;
+
+            border: 1px dashed #555;
+
+            color: #ddd;
+
+            text-align: center;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .botao-imagem:hover {
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+
+        #previewImagem {
+            display: none;
+
+            width: 100%;
+            max-height: 300px;
+
+            object-fit: contain;
+
+            margin-top: 15px;
+
+            border-radius: 10px;
+
+            background: #111;
+        }
+
+        /* =========================
+           ADMIN
+        ========================= */
+
+        .admin {
+            max-width: 900px;
+            margin: 35px auto 0;
+        }
+
+        .admin h3 {
+            margin-bottom: 15px;
+        }
+
+        .admin-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            background: #181818;
+
+            border: 1px solid #292929;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+        }
+
+        .admin-info {
+            min-width: 0;
+        }
+
+        .admin-info strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .admin-info small {
+            color: #999;
+        }
+
+        .admin-acoes {
+            display: flex;
+            gap: 7px;
+        }
+
+        .btn-editar,
+        .btn-excluir {
+            border: none;
+
+            padding: 9px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .btn-editar {
+            background: #ffc107;
+            color: #111;
+        }
+
+        .btn-excluir {
+            background: #e53935;
+            color: white;
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            color: #666;
+
+            padding: 35px 15px;
+
+            margin-top: 30px;
+
+            border-top: 1px solid #222;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav button {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+
+            .hero {
+                min-height: 380px;
+            }
+
+            .produtos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .produto img {
+                height: 160px;
+            }
+
+            .produto-conteudo {
+                padding: 11px;
+            }
+
+            .produto h3 {
+                font-size: 16px;
+            }
+
+            .preco {
+                font-size: 18px;
+            }
+
+            .descricao {
+                font-size: 13px;
+            }
+
+            .admin-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .admin-acoes {
+                width: 100%;
+            }
+
+            .btn-editar,
+            .btn-excluir {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .produtos {
+                grid-template-columns: 1fr;
+            }
+
+            .produto img {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header>
+
+        <div class="logo">
+            PORCEL <span>SHOP</span>
+        </div>
+
+        <nav>
+            <button onclick="mostrarPagina('inicio')">
+                🏠 Início
+            </button>
+
+            <button onclick="mostrarPagina('produtos')">
+                🛍️ Produtos
+            </button>
+
+            <button onclick="mostrarPagina('adicionar')">
+                ➕ Adicionar
+            </button>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         INÍCIO
+    ========================== -->
+
+    <main>
+
+        <section id="inicio" class="pagina ativa">
+
+            <div class="hero">
+
+                <h1>
+                    Bem-vindo ao
+                    <span>Porcel Shop</span>
+                </h1>
+
+                <p>
+                    Encontre produtos, veja as ofertas e fale
+                    diretamente com o vendedor pelo WhatsApp.
+                </p>
+
+                <button
+                    class="botao-principal"
+                    onclick="mostrarPagina('produtos')"
+                >
+                    🛍️ Ver produtos
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUTOS
+        ========================== -->
+
+        <section id="produtos" class="pagina">
+
+            <div class="titulo-pagina">
+
+                <h2>🛍️ Produtos</h2>
+
+                <p>
+                    Confira os produtos disponíveis.
+                </p>
+
+            </div>
+
+            <input
+                id="buscaProdutos"
+                class="busca"
+                type="search"
+                placeholder="🔎 Pesquisar produto..."
+                oninput="pesquisar()"
+            >
+
+            <div
+                id="todosProdutos"
+                class="produtos"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             ADICIONAR PRODUTO
+        ========================== -->
+
+        <section id="adicionar" class="pagina">
+
+            <div class="titulo-pagina">
+
+                <h2>➕ Adicionar produto</h2>
+
+                <p>
+                    Cadastre seu produto no Porcel Shop.
+                </p>
+
+            </div>
+
+
+            <div class="formulario">
+
+                <!-- IMAGEM -->
+
+                <div class="campo">
+
+                    <label>
+                        Imagem do produto
+                    </label>
+
+                    <label
+                        class="botao-imagem"
+                        for="campoImagem"
+                    >
+                        📸 Escolher imagem da galeria
+                    </label>
+
+                    <input
+                        id="campoImagem"
+                        type="file"
+                        accept="image/*"
+                        onchange="escolherImagem(event)"
+                    >
+
+                    <img
+                        id="previewImagem"
+                        alt="Prévia da imagem"
+                    >
+
+                </div>
+
+
+                <!-- NOME -->
+
+                <div class="campo">
+
+                    <label for="nomeProduto">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        id="nomeProduto"
+                        type="text"
+                        placeholder="Ex: Camiseta"
+                    >
+
+                </div>
+
+
+                <!-- PREÇO -->
+
+                <div class="campo">
+
+                    <label for="precoProduto">
+                        Preço
+                    </label>
+
+                    <input
+                        id="precoProduto"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        placeholder="Ex: 49.90"
+                    >
+
+                </div>
+
+
+                <!-- DESCRIÇÃO -->
+
+                <div class="campo">
+
+                    <label for="descricaoProduto">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricaoProduto"
+                        placeholder="Digite uma descrição do produto..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- WHATSAPP -->
+
+                <div class="campo">
+
+                    <label for="whatsappProduto">
+                        WhatsApp do vendedor
+                    </label>
+
+                    <input
+                        id="whatsappProduto"
+                        type="tel"
+                        placeholder="Ex: 5516999999999"
+                    >
+
+                    <small style="color:#777;">
+                        Digite o número com DDD e código do Brasil.
+                    </small>
+
+                </div>
+
+
+                <button
+                    class="botao-principal"
+                    style="width:100%;"
+                    onclick="adicionarProduto()"
+                >
+                    ✅ Adicionar produto
+                </button>
+
+            </div>
+
+
+            <!-- ADMINISTRAÇÃO -->
+
+            <div class="admin">
+
+                <h3>
+                    ⚙️ Produtos cadastrados
+                </h3>
+
+                <div id="listaAdmin"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Porcel Shop
+        </p>
+
+        <p style="margin-top:7px;">
+            Produtos e anúncios diretamente com os vendedores.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* =====================================
+           DADOS
+        ===================================== */
+
+        let produtos =
+            JSON.parse(
+                localStorage.getItem("porcelShopProdutos")
+            ) || [];
+
+        let imagemAtual = "";
+
+        let produtoEditando = null;
+
+
+        /* =====================================
+           NAVEGAÇÃO
+        ===================================== */
+
+        function mostrarPagina(nome) {
+
+            const paginas =
+                document.querySelectorAll(".pagina");
+
+            paginas.forEach(function(pagina) {
+
+                pagina.classList.remove("ativa");
+
+            });
+
+            const pagina =
+                document.getElementById(nome);
+
+            if (pagina) {
+
+                pagina.classList.add("ativa");
+
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            atualizarProdutos();
+            atualizarAdmin();
+
+        }
+
+
+        /* =====================================
+           ESCOLHER IMAGEM
+        ===================================== */
+
+        function escolherImagem(event) {
+
+            const arquivo =
+                event.target.files[0];
+
+            if (!arquivo) {
+                return;
+            }
+
+            if (!arquivo.type.startsWith("image/")) {
+
+                alert("Escolha uma imagem válida.");
+
+                event.target.value = "";
+
+                return;
+            }
+
+            const leitor = new FileReader();
+
+            leitor.onload = function(e) {
+
+                imagemAtual = e.target.result;
+
+                const preview =
+                    document.getElementById(
+                        "previewImagem"
+                    );
+
+                preview.src = imagemAtual;
+
+                preview.style.display = "block";
+
+            };
+
+            leitor.readAsDataURL(arquivo);
+        }
+
+
+        /* =====================================
+           ADICIONAR PRODUTO
+        ===================================== */
+
+        function adicionarProduto() {
+
+            const nome =
+                document
+                .getElementById("nomeProduto")
+                .value
+                .trim();
+
+            const preco =
+                document
+                .getElementById("precoProduto")
+                .value
+                .trim();
+
+            const descricao =
+                document
+                .getElementById("descricaoProduto")
+                .value
+                .trim();
+
+            const whatsapp =
+                document
+                .getElementById("whatsappProduto")
+                .value
+                .trim();
+
+
+            if (!nome) {
+
+                alert("Digite o nome do produto.");
+
+                return;
+            }
+
+
+            if (!preco) {
+
+                alert("Digite o preço do produto.");
+
+                return;
+            }
+
+
+            if (!imagemAtual) {
+
+                alert("Escolha uma imagem para o produto.");
+
+                return;
+            }
+
+
+            if (!whatsapp) {
+
+                alert("Digite o WhatsApp do vendedor.");
+
+                return;
+            }
+
+
+            const produto = {
+
+                id: Date.now(),
+
+                nome: nome,
+
+                preco: parseFloat(preco),
+
+                descricao: descricao,
+
+                whatsapp: whatsapp,
+
+                imagem: i
